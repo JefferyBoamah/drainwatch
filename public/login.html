@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b5d4e">
+<meta name="theme-color" content="#08234F">
 <title>Staff sign in – DrainWatch</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
@@ -11,13 +11,13 @@
 <body data-page="login">
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="app-header">
-  <h1>DrainWatch</h1>
+  <h1><a class="brand" href="home.html">DrainWatch</a></h1>
   <p class="tagline">Sign in for crew and assembly staff.</p>
 </header>
 <p id="status" class="status" role="status" aria-live="polite"></p>
 <main id="main" tabindex="-1">
   <form id="phone-form" class="form" novalidate>
-    <h2>Sign in</h2>
+    <h2>Staff sign in</h2>
     <p class="hint">Enter the phone number the assembly registered for you. We will send you a code by text message.</p>
     <p class="field">
       <label for="phone">Phone number</label>
@@ -38,7 +38,8 @@
     <button type="button" id="change-phone" class="target">Change phone number</button>
   </form>
 
-  <p class="switch-link"><a class="target" href="join.html">Report a drain as a resident</a></p>
+  <p class="switch-link"><a class="target" href="join.html">Sign in as a resident</a></p>
+  <p class="switch-link"><a class="target" href="home.html">Go back to the home page</a></p>
 </main>
 <script src="common.js"></script>
 <script src="auth.js"></script>

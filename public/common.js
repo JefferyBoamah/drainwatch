@@ -42,6 +42,7 @@ const DW = (() => {
 
     codeSent: 'We sent a 6-number code by text message. Enter it below.',
     signingIn: 'Code accepted. Opening DrainWatch.',
+    openDashboard: 'Open my dashboard',
 
     chooseLandmark: 'Choose a landmark',
     noRainAlerts: 'No rain alerts',
@@ -263,7 +264,7 @@ const DW = (() => {
     const token = store.get(TOKEN_KEY);
     const mine = store.get(ROLE_KEY);
     if (!token || !HOME[mine]) {
-      location.replace('join.html');
+      location.replace('home.html');
       return false;
     }
     if (mine !== role) {
@@ -483,7 +484,7 @@ const DW = (() => {
             console.warn('Could not clear cached lists on sign out', err);
           }
         }
-        location.href = 'join.html';
+        location.href = 'home.html';
       });
     }
     flushQueue();

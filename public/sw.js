@@ -1,10 +1,10 @@
 'use strict';
 // Change the version when you change any file in /public, or phones will keep the old copy.
-const SHELL_CACHE = 'dw-shell-v6';
-const API_CACHE = 'dw-api-v6';
+const SHELL_CACHE = 'dw-shell-v7';
+const API_CACHE = 'dw-api-v7';
 
 const CORE = [
-  '/index.html', '/join.html', '/login.html', '/crew.html', '/admin.html', '/offline.html',
+  '/index.html', '/home.html', '/join.html', '/login.html', '/crew.html', '/admin.html', '/offline.html',
   '/common.js', '/auth.js', '/report.js', '/crew.js', '/admin.js', '/manifest.json'
 ];
 // These may be missing (the deployer supplies them) or slow; they must not block the install.

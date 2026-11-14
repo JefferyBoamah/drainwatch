@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08234F">
+<meta name="description" content="DrainWatch lets Accra residents report blocked drains so crews can clear the right ones before the rain.">
+<title>DrainWatch – Clear the right drains before the rain</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="app-header">
+  <h1><a class="brand" href="home.html">DrainWatch</a></h1>
+  <nav class="home-nav" aria-label="Account">
+    <a class="home-nav-link target" href="login.html">Staff sign in</a>
+    <a id="nav-signin" class="home-nav-cta target" href="join.html">Sign in</a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <p class="hero-kicker">For residents, crews and the assembly in Accra</p>
+      <h2 id="hero-title" class="hero-title">Clear the right drains before the rain.</h2>
+      <p class="hero-text">DrainWatch lets anyone in Accra report a blocked drain in a few taps. Every report feeds a ranked work list, so crews clear the drains that matter most before a storm arrives.</p>
+      <p class="hero-actions">
+        <a id="hero-signin" class="hero-cta target" href="join.html">Report a drain</a>
+        <a class="hero-link target" href="#how">See how it works</a>
+      </p>
+      <ul class="hero-points">
+        <li>Free to use</li>
+        <li>No password</li>
+        <li>No photo needed</li>
+        <li>Works offline</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="how" class="band" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title" class="band-title">How it works</h2>
+      <p class="band-lead">Four steps take a drain from blocked to cleared, and you are told when it is done.</p>
+      <ol class="step-cards">
+        <li class="step-card">
+          <h3>Report</h3>
+          <p>Say how the drain is (clear, partly blocked or fully blocked) and where it is. Use your location or pick a landmark.</p>
+        </li>
+        <li class="step-card">
+          <h3>Rank</h3>
+          <p>DrainWatch scores each drain using the blockage, the rain forecast, the flood risk and how many people are nearby.</p>
+        </li>
+        <li class="step-card">
+          <h3>Clear</h3>
+          <p>The assembly assigns the top drains to crews. Crews get directions and add a photo when the drain is cleared.</p>
+        </li>
+        <li class="step-card">
+          <h3>Confirm</h3>
+          <p>You get a message asking if the drain is really clear. If you say it is still blocked, the crew is sent back.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band band-tint" aria-labelledby="why-title">
+    <div class="wrap">
+      <h2 id="why-title" class="band-title">Why it helps</h2>
+      <p class="band-lead">Drains are usually cleared on a fixed schedule or after a complaint. DrainWatch adds the missing information: which drain matters most right now.</p>
+      <ul class="feature-grid">
+        <li class="feature">
+          <h3>It watches the rain</h3>
+          <p>The 72-hour forecast shows how many drains crews can reach before the heaviest rain, and which ones are at risk.</p>
+        </li>
+        <li class="feature">
+          <h3>It listens to neighbours</h3>
+          <p>When two or more people report the same drain, it moves up the list. This also makes false reports harder.</p>
+        </li>
+        <li class="feature">
+          <h3>It checks the work</h3>
+          <p>A cleared drain is only final when a resident confirms it, or two days pass with no complaint.</p>
+        </li>
+        <li class="feature">
+          <h3>It finds quiet areas</h3>
+          <p>High-risk drains with no recent report are flagged for a visit, so areas that report less are not forgotten.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="who-title">
+    <div class="wrap">
+      <h2 id="who-title" class="band-title">Who it is for</h2>
+      <ul class="feature-grid">
+        <li class="feature">
+          <h3>Residents</h3>
+          <p>Report a drain with only your phone number. You can speak your note and have messages read aloud.</p>
+          <p><a class="feature-link target" href="join.html">Sign in to report</a></p>
+        </li>
+        <li class="feature">
+          <h3>Crews</h3>
+          <p>See your assigned drains, get directions, and mark each one done with an after-photo, even with no signal.</p>
+          <p><a class="feature-link target" href="login.html">Crew sign in</a></p>
+        </li>
+        <li class="feature">
+          <h3>Assembly staff</h3>
+          <p>Work from one ranked list and a map. Assign crews, review reports and download the numbers.</p>
+          <p><a class="feature-link target" href="login.html">Staff sign in</a></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta-band">
+        <h2 id="cta-title" class="cta-title">Seen a blocked drain?</h2>
+        <p class="cta-text">Report it now. It takes only your phone number.</p>
+        <p><a id="cta-signin" class="hero-cta target" href="join.html">Report a drain</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>DrainWatch. A drain reporting tool for Accra.</p>
+</footer>
+<script src="common.js"></script>
+<script>
+'use strict';
+(function () {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(function (err) { console.warn('Service worker did not register', err); });
+  }
+  // Signed-in visitors go straight to their own page from every sign-in link.
+  var role = DW.store.get(DW.ROLE_KEY);
+  if (DW.store.get(DW.TOKEN_KEY) && DW.HOME[role]) {
+    ['nav-signin', 'hero-signin', 'cta-signin'].forEach(function (id) {
+      document.getElementById(id).href = DW.HOME[role];
+    });
+    document.getElementById('nav-signin').textContent = DW.S.openDashboard;
+  }
+})();
+</script>
+</body>
+</html>
