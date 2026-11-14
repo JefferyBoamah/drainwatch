@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b5d4e">
+<title>Staff sign in – DrainWatch</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="login">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="app-header">
+  <h1>DrainWatch</h1>
+  <p class="tagline">Sign in for crew and assembly staff.</p>
+</header>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<main id="main" tabindex="-1">
+  <form id="phone-form" class="form" novalidate>
+    <h2>Sign in</h2>
+    <p class="hint">Enter the phone number the assembly registered for you. We will send you a code by text message.</p>
+    <p class="field">
+      <label for="phone">Phone number</label>
+      <input type="tel" id="phone" name="phone" class="target" autocomplete="tel" inputmode="tel" required>
+    </p>
+    <button type="submit" id="send-code" class="target button-primary">Send my code</button>
+  </form>
+
+  <form id="code-form" class="form" novalidate hidden>
+    <h2 id="code-heading" tabindex="-1">Enter your code</h2>
+    <p class="hint">The code has 6 numbers. It works for 10 minutes.</p>
+    <p class="field">
+      <label for="code">Code from the text message</label>
+      <input type="text" id="code" name="code" class="target" autocomplete="one-time-code" inputmode="numeric" maxlength="6" required>
+    </p>
+    <button type="submit" id="verify-code" class="target button-primary">Sign in</button>
+    <button type="button" id="resend-code" class="target">Send a new code</button>
+    <button type="button" id="change-phone" class="target">Change phone number</button>
+  </form>
+
+  <p class="switch-link"><a class="target" href="join.html">Report a drain as a resident</a></p>
+</main>
+<script src="common.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>

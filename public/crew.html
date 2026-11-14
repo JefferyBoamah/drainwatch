@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b5d4e">
+<title>My tasks – DrainWatch</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="crew">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="app-header">
+  <h1>DrainWatch crew</h1>
+  <p class="read-aloud-row">
+    <input type="checkbox" id="read-aloud" class="target">
+    <label for="read-aloud">Read messages aloud</label>
+  </p>
+  <button type="button" id="logout" class="target">Sign out</button>
+</header>
+
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<p id="queue-state" class="queue-state" data-state="synced"></p>
+
+<main id="main" tabindex="-1">
+  <section id="view-tasks" class="view" aria-labelledby="tasks-heading">
+    <h2 id="tasks-heading" tabindex="-1">My tasks</h2>
+    <button type="button" id="refresh-tasks" class="target">Refresh tasks</button>
+    <p id="tasks-empty" class="empty" hidden></p>
+    <ul id="task-list" class="card-list"></ul>
+  </section>
+
+  <section id="view-task" class="view" aria-labelledby="task-title" hidden>
+    <p><a id="back-to-tasks" class="target" href="#tasks">Go back to my tasks</a></p>
+    <h2 id="task-title" tabindex="-1"></h2>
+    <p id="task-status" class="task-status"></p>
+    <p id="task-condition"></p>
+    <p id="task-note"></p>
+    <p><a id="task-navigate" class="target button-primary" href="#tasks" target="_blank" rel="noopener">Navigate to this drain</a></p>
+    <form id="done-form" class="form" novalidate>
+      <p class="field">
+        <label for="after-photo">Add after-photo (needed to finish)</label>
+        <input type="file" id="after-photo" name="after-photo" class="target" accept="image/*" capture="environment" aria-describedby="after-hint">
+      </p>
+      <p id="after-hint" class="hint">Take a photo of the cleared drain. Please do not photograph people's faces.</p>
+      <button type="submit" id="done-submit" class="target button-primary">Mark as done</button>
+    </form>
+  </section>
+</main>
+<script src="common.js"></script>
+<script src="crew.js"></script>
+</body>
+</html>

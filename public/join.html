@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b5d4e">
+<title>Report a blocked drain – DrainWatch</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="join">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="app-header">
+  <h1>DrainWatch</h1>
+  <p class="tagline">Help crews clear the right drains in Accra before the rain.</p>
+</header>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<main id="main" tabindex="-1">
+  <section id="join-intro" class="join-intro" aria-labelledby="join-heading">
+    <h2 id="join-heading">Report a blocked drain</h2>
+    <p>Anyone in Accra can report a drain. It is free. You do not need a password or a photo.</p>
+    <ol class="steps">
+      <li>Enter your phone number below.</li>
+      <li>Enter the 6-number code we send you by text message.</li>
+      <li>Tell us how the drain is and where it is. We will message you when a crew clears it.</li>
+    </ol>
+  </section>
+
+  <form id="phone-form" class="form" novalidate>
+    <h2>Start with your phone number</h2>
+    <p class="hint">New here? Your number makes your account. Been here before? The same number signs you in.</p>
+    <p class="field">
+      <label for="phone">Phone number</label>
+      <input type="tel" id="phone" name="phone" class="target" autocomplete="tel" inputmode="tel" aria-describedby="phone-hint" required>
+    </p>
+    <p id="phone-hint" class="hint">Use a Ghana mobile number, like 024 123 4567. We only use it to sign you in and to message you about your reports.</p>
+    <button type="submit" id="send-code" class="target button-primary">Send my code</button>
+  </form>
+
+  <form id="code-form" class="form" novalidate hidden>
+    <h2 id="code-heading" tabindex="-1">Enter your code</h2>
+    <p class="hint">The code has 6 numbers. It works for 10 minutes.</p>
+    <p class="field">
+      <label for="code">Code from the text message</label>
+      <input type="text" id="code" name="code" class="target" autocomplete="one-time-code" inputmode="numeric" maxlength="6" required>
+    </p>
+    <button type="submit" id="verify-code" class="target button-primary">Start reporting</button>
+    <button type="button" id="resend-code" class="target">Send a new code</button>
+    <button type="button" id="change-phone" class="target">Change phone number</button>
+  </form>
+
+  <p class="switch-link"><a class="target" href="login.html">Sign in as crew or assembly staff</a></p>
+</main>
+<script src="common.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>

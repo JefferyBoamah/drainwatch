@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b5d4e">
+<title>Report a drain – DrainWatch</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="reporter">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="app-header">
+  <h1>DrainWatch</h1>
+  <nav aria-label="Main">
+    <ul class="nav-list">
+      <li><a id="nav-report" class="nav-link target" href="#report">Report a drain</a></li>
+      <li><a id="nav-mine" class="nav-link target" href="#mine">My reports</a></li>
+      <li><a id="nav-alerts" class="nav-link target" href="#alerts">Messages</a></li>
+    </ul>
+  </nav>
+  <p class="read-aloud-row">
+    <input type="checkbox" id="read-aloud" class="target">
+    <label for="read-aloud">Read messages aloud</label>
+  </p>
+  <button type="button" id="logout" class="target">Sign out</button>
+</header>
+
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<p id="queue-state" class="queue-state" data-state="synced"></p>
+
+<main id="main" tabindex="-1">
+  <section id="confirm-box" class="confirm-box" aria-labelledby="confirm-heading" hidden>
+    <h2 id="confirm-heading">Confirm clearance</h2>
+    <p id="confirm-text"></p>
+    <button type="button" id="confirm-yes" class="target button-primary">Yes, it is clear</button>
+    <button type="button" id="confirm-no" class="target">Still blocked</button>
+  </section>
+
+  <section id="view-report" class="view" aria-labelledby="report-heading">
+    <h2 id="report-heading" tabindex="-1">Report a drain</h2>
+    <form id="report-form" class="form" novalidate>
+      <fieldset id="condition-group" class="choice-group">
+        <legend>How is the drain?</legend>
+        <p class="choice">
+          <input type="radio" name="condition" id="cond-clear" value="clear">
+          <label for="cond-clear" class="target">Clear</label>
+        </p>
+        <p class="choice">
+          <input type="radio" name="condition" id="cond-partial" value="partial">
+          <label for="cond-partial" class="target">Partly blocked</label>
+        </p>
+        <p class="choice">
+          <input type="radio" name="condition" id="cond-full" value="full">
+          <label for="cond-full" class="target">Fully blocked</label>
+        </p>
+      </fieldset>
+
+      <fieldset id="location-group" class="location-group">
+        <legend>Where is the drain?</legend>
+        <button type="button" id="use-gps" class="target">Use my current location</button>
+        <p id="gps-result" class="gps-result"></p>
+        <p class="field">
+          <label for="landmark">Or choose the nearest landmark</label>
+          <select id="landmark" name="landmark" class="target">
+            <option value="">Choose a landmark</option>
+          </select>
+        </p>
+      </fieldset>
+
+      <p class="field">
+        <label for="photo">Add a photo (you can skip this)</label>
+        <input type="file" id="photo" name="photo" class="target" accept="image/*" aria-describedby="photo-hint">
+      </p>
+      <p id="photo-hint" class="hint">Please do not photograph people's faces.</p>
+
+      <p class="field">
+        <label for="note">Add a note (you can skip this)</label>
+        <textarea id="note" name="note" class="target" rows="3" maxlength="500"></textarea>
+      </p>
+      <button type="button" id="speak-note" class="target">Speak your description</button>
+
+      <button type="submit" id="send-report" class="target button-primary">Send report</button>
+    </form>
+  </section>
+
+  <section id="view-mine" class="view" aria-labelledby="mine-heading" hidden>
+    <h2 id="mine-heading" tabindex="-1">My reports</h2>
+    <p id="mine-empty" class="empty" hidden></p>
+    <ul id="mine-list" class="card-list"></ul>
+  </section>
+
+  <section id="view-alerts" class="view" aria-labelledby="alerts-heading" hidden>
+    <h2 id="alerts-heading" tabindex="-1">Messages</h2>
+    <form id="rain-form" class="form" novalidate>
+      <h3>Rain alerts</h3>
+      <p class="hint">Get a message before heavy rain, with the number of blocked drains near a place you choose.</p>
+      <p class="field">
+        <label for="rain-landmark">Send me rain alerts for this place</label>
+        <select id="rain-landmark" name="rain-landmark" class="target">
+          <option value="">No rain alerts</option>
+        </select>
+      </p>
+      <button type="submit" id="save-rain" class="target">Save rain alerts</button>
+    </form>
+    <h3>Inbox</h3>
+    <p id="alerts-empty" class="empty" hidden></p>
+    <ul id="alerts-list" class="card-list"></ul>
+  </section>
+</main>
+<script src="common.js"></script>
+<script src="report.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b5d4e">
+<title>Admin dashboard – DrainWatch</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="admin">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="app-header">
+  <h1>DrainWatch admin</h1>
+  <nav aria-label="Sections">
+    <ul class="nav-list">
+      <li><a class="nav-link target" href="#sec-ranking">Ranked drains</a></li>
+      <li><a class="nav-link target" href="#sec-map">Map</a></li>
+      <li><a class="nav-link target" href="#sec-blind">Blind spots</a></li>
+      <li><a class="nav-link target" href="#sec-review">Review queue</a></li>
+      <li><a class="nav-link target" href="#sec-stats">Numbers</a></li>
+      <li><a class="nav-link target" href="#sec-crew">Crew</a></li>
+      <li><a class="nav-link target" href="#sec-landmarks">Landmarks</a></li>
+    </ul>
+  </nav>
+  <p class="read-aloud-row">
+    <input type="checkbox" id="read-aloud" class="target">
+    <label for="read-aloud">Read messages aloud</label>
+  </p>
+  <button type="button" id="logout" class="target">Sign out</button>
+</header>
+
+<p id="status" class="status" role="status" aria-live="polite"></p>
+
+<main id="main" tabindex="-1">
+  <section id="sec-ranking" aria-labelledby="ranking-heading">
+    <h2 id="ranking-heading">Drains to clear before the rain</h2>
+    <p id="rain-summary" class="rain-summary" data-stale="false"></p>
+    <form id="capacity-form" class="form form-inline" novalidate>
+      <p class="field">
+        <label for="capacity">Crew capacity (drains per day, all crews together)</label>
+        <input type="number" id="capacity" name="capacity" class="target" min="1" max="500" step="1" inputmode="numeric" required>
+      </p>
+      <button type="submit" id="save-capacity" class="target">Save capacity</button>
+    </form>
+    <button type="button" id="refresh" class="target">Refresh list</button>
+    <p id="ranking-empty" class="empty" hidden></p>
+    <ul id="ranking" class="ranking"></ul>
+  </section>
+
+  <section id="sec-map" aria-labelledby="map-heading">
+    <h2 id="map-heading">Map</h2>
+    <p class="hint">The map shows the same drains as the ranked list. Each marker shows the drain's rank number.</p>
+    <p id="map-note" class="map-note"></p>
+    <div id="map" class="map"></div>
+  </section>
+
+  <section id="sec-blind" aria-labelledby="blind-heading">
+    <h2 id="blind-heading">Blind spots</h2>
+    <p class="hint">High flood risk drains with no report in 14 days. Some areas report less, so these need a visit.</p>
+    <p id="blind-empty" class="empty" hidden></p>
+    <ul id="blind-list" class="card-list"></ul>
+  </section>
+
+  <section id="sec-review" aria-labelledby="review-heading">
+    <h2 id="review-heading">Review queue</h2>
+    <p class="hint">Reports sent without a photo. They already count in the ranking. Confirm each one, or correct its condition.</p>
+    <p id="review-empty" class="empty" hidden></p>
+    <ul id="review-list" class="card-list"></ul>
+  </section>
+
+  <section id="sec-stats" aria-labelledby="stats-heading">
+    <h2 id="stats-heading">Numbers</h2>
+    <dl id="stats" class="stats">
+      <dt>Reports received</dt><dd id="stat-reports"></dd>
+      <dt>Drains cleared</dt><dd id="stat-cleared"></dd>
+      <dt>Average time from report to cleared</dt><dd id="stat-avg"></dd>
+      <dt>Blocked drains still open before the rain peak</dt><dd id="stat-blocked"></dd>
+    </dl>
+    <button type="button" id="export-csv" class="target">Download ranked list as CSV</button>
+  </section>
+
+  <section id="sec-crew" aria-labelledby="crew-heading">
+    <h2 id="crew-heading">Crew</h2>
+    <form id="crew-form" class="form form-inline" novalidate>
+      <p class="field">
+        <label for="crew-phone">Phone number of the new crew member</label>
+        <input type="tel" id="crew-phone" name="crew-phone" class="target" autocomplete="off" inputmode="tel" required>
+      </p>
+      <button type="submit" id="invite-crew" class="target">Invite crew member</button>
+    </form>
+    <p id="crew-empty" class="empty" hidden></p>
+    <ul id="crew-list" class="card-list"></ul>
+  </section>
+
+  <section id="sec-landmarks" aria-labelledby="landmarks-heading">
+    <h2 id="landmarks-heading">Landmarks</h2>
+    <form id="landmark-form" class="form" novalidate>
+      <input type="hidden" id="lm-id" name="lm-id" value="">
+      <p class="field">
+        <label for="lm-name">Landmark name</label>
+        <input type="text" id="lm-name" name="lm-name" class="target" maxlength="80" required>
+      </p>
+      <p class="field">
+        <label for="lm-lat">Latitude (for example 5.5665)</label>
+        <input type="number" id="lm-lat" name="lm-lat" class="target" step="any" inputmode="decimal" required>
+      </p>
+      <p class="field">
+        <label for="lm-lng">Longitude (for example -0.2370)</label>
+        <input type="number" id="lm-lng" name="lm-lng" class="target" step="any" inputmode="decimal" required>
+      </p>
+      <p id="lm-active-row" class="field" hidden>
+        <input type="checkbox" id="lm-active" name="lm-active" class="target" checked>
+        <label for="lm-active">Show this landmark to reporters</label>
+      </p>
+      <button type="submit" id="lm-save" class="target">Add landmark</button>
+      <button type="button" id="lm-cancel" class="target" hidden>Cancel editing</button>
+    </form>
+    <ul id="landmark-list" class="card-list"></ul>
+  </section>
+</main>
+<script id="leaflet-js" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" async></script>
+<script src="common.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
