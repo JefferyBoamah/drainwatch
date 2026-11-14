@@ -1,7 +1,7 @@
 'use strict';
 // Change the version when you change any file in /public, or phones will keep the old copy.
-const SHELL_CACHE = 'dw-shell-v5';
-const API_CACHE = 'dw-api-v5';
+const SHELL_CACHE = 'dw-shell-v6';
+const API_CACHE = 'dw-api-v6';
 
 const CORE = [
   '/index.html', '/join.html', '/login.html', '/crew.html', '/admin.html', '/offline.html',
