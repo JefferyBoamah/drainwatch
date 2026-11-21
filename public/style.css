@@ -615,3 +615,75 @@ body[data-page="home"] main > * + * { margin-top: 0; }
 .cta-text { margin-inline: auto; color: var(--blue-100); font-size: 1.0625rem; }
 .site-footer { padding: 2rem 1.25rem 2.5rem; color: var(--grey-500); font-size: 0.875rem; text-align: center; }
 .site-footer p { margin-inline: auto; }
+
+/* ================= Homepage photo slideshow with depth ================= */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: min(82dvh, 46rem);
+  perspective: 1200px;
+}
+.hero .wrap { position: relative; z-index: 2; }
+.hero-title, .hero-text { text-shadow: 0 2px 16px rgba(7, 27, 58, 0.55); }
+
+/* Two photo layers. The navy gradient sits on top of each photo so the text stays readable. */
+.hero::before, .hero::after {
+  content: "";
+  position: absolute;
+  inset: -6%;
+  z-index: 0;
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.hero::before {
+  background-image:
+    linear-gradient(100deg, rgba(7, 27, 58, 0.92) 0%, rgba(8, 35, 79, 0.75) 45%, rgba(11, 58, 130, 0.35) 100%),
+    url("https://www.stabroeknews.com/images/2020/07/cleardrain1.jpg");
+  animation: slide-a 12s linear infinite;
+}
+.hero::after {
+  background-image:
+    linear-gradient(100deg, rgba(7, 27, 58, 0.92) 0%, rgba(8, 35, 79, 0.75) 45%, rgba(11, 58, 130, 0.35) 100%),
+    url("https://mediakoraput.wordpress.com/wp-content/uploads/2017/07/img-20170718-wa0258.jpg");
+  opacity: 0;
+  animation: slide-b 12s linear infinite;
+}
+
+/* Each photo zooms out and drifts while it is showing, then cross-fades to the other. */
+@keyframes slide-a {
+  0%   { opacity: 1; transform: scale(1.18) translate3d(-2%, 1%, 0); }
+  45%  { opacity: 1; }
+  55%  { opacity: 0; transform: scale(1.02) translate3d(1.5%, -1%, 0); }
+  95%  { opacity: 0; transform: scale(1.18) translate3d(-2%, 1%, 0); }
+  100% { opacity: 1; transform: scale(1.18) translate3d(-2%, 1%, 0); }
+}
+@keyframes slide-b {
+  0%   { opacity: 0; transform: scale(1.18) translate3d(2%, -1%, 0); }
+  45%  { opacity: 0; transform: scale(1.18) translate3d(2%, -1%, 0); }
+  55%  { opacity: 1; }
+  95%  { opacity: 1; transform: scale(1.02) translate3d(-1.5%, 1%, 0); }
+  100% { opacity: 0; transform: scale(1.02) translate3d(-1.5%, 1%, 0); }
+}
+
+/* Headline content floats in towards the viewer once, for a sense of depth. */
+@keyframes float-in {
+  from { opacity: 0; transform: translate3d(0, 24px, -80px); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.hero .wrap > * { animation: float-in 0.7s cubic-bezier(.2,.7,.2,1) backwards; }
+.hero .wrap > :nth-child(2) { animation-delay: 0.1s; }
+.hero .wrap > :nth-child(3) { animation-delay: 0.2s; }
+.hero .wrap > :nth-child(4) { animation-delay: 0.3s; }
+.hero .wrap > :nth-child(5) { animation-delay: 0.4s; }
+
+/* Less motion requested: show the first photo still, no slideshow. */
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none !important; transform: none; opacity: 1; }
+  .hero::after { display: none; }
+  .hero .wrap > * { animation: none !important; }
+}
